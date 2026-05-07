@@ -5,14 +5,14 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllBrochures, getBrochureBySlug } from "@/lib/brochures";
 
 export function generateStaticParams() {
-  return getAllBrochures().map((b) => ({ slug: b.slug }));
+  return getAllBrochures("zh").map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata(
   props: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await props.params;
-  const brochure = getBrochureBySlug(slug);
+  const brochure = getBrochureBySlug(slug, "zh");
   if (!brochure) return {};
   return {
     title: brochure.title,
@@ -20,18 +20,21 @@ export async function generateMetadata(
   };
 }
 
-export default async function BrochurePage(
+export default async function ZhBrochurePage(
   props: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await props.params;
-  const brochure = getBrochureBySlug(slug);
+  const brochure = getBrochureBySlug(slug, "zh");
   if (!brochure) notFound();
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12">
       <nav className="mb-6 text-sm text-slate-600 dark:text-slate-400">
-        <Link href="/brochures" className="hover:text-brand-700 dark:hover:text-brand-300">
-          ← All brochures
+        <Link
+          href="/zh/brochures"
+          className="hover:text-brand-700 dark:hover:text-brand-300"
+        >
+          ← 返回全部手册
         </Link>
       </nav>
       <header className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-800">
@@ -46,10 +49,10 @@ export default async function BrochurePage(
         </p>
         <div className="mt-4 flex flex-wrap gap-3 text-sm text-slate-500 dark:text-slate-400">
           <span className="rounded-full bg-slate-100 px-3 py-1 dark:bg-slate-800">
-            {brochure.readingTime} min read
+            {brochure.readingTime} 分钟阅读
           </span>
           <span className="rounded-full bg-slate-100 px-3 py-1 capitalize dark:bg-slate-800">
-            {brochure.level}
+            {levelLabel(brochure.level)}
           </span>
         </div>
       </header>
@@ -58,4 +61,17 @@ export default async function BrochurePage(
       </div>
     </article>
   );
+}
+
+function levelLabel(level: string): string {
+  switch (level) {
+    case "beginner":
+      return "入门";
+    case "intermediate":
+      return "进阶";
+    case "advanced":
+      return "高风险用户";
+    default:
+      return level;
+  }
 }

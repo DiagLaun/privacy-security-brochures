@@ -3,7 +3,7 @@ import { getAllBrochures } from "@/lib/brochures";
 import BrochureCard from "@/components/BrochureCard";
 
 export default function Home() {
-  const brochures = getAllBrochures().slice(0, 3);
+  const brochures = getAllBrochures("en").slice(0, 3);
 
   return (
     <div>

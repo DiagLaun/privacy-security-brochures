@@ -28,7 +28,19 @@ export default function AboutPage() {
         <p>
           The starter set includes brochures on strong passwords, phishing,
           two-factor authentication, safe browsing, data privacy, device
-          security, and social engineering. More coming over time.
+          security, social engineering, incident response, and an advanced
+          guide for high-risk environments (journalists, lawyers, activists,
+          and people crossing borders into heavily-surveilled jurisdictions).
+        </p>
+        <p>
+          A separate{" "}
+          <a href="/zh" className="font-semibold">
+            Chinese-language version (中文版)
+          </a>{" "}
+          covers topics specific to mainland China — the National Anti-Fraud
+          Center app, iCloud / GCBD (云上贵州), HarmonyOS / HyperOS privacy
+          settings, phone-manager apps, network-level monitoring, and
+          input-method telemetry.
         </p>
 
         <h2>Contributing</h2>

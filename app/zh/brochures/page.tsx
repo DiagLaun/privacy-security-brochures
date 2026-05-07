@@ -3,21 +3,21 @@ import { getAllBrochures, getCategories } from "@/lib/brochures";
 import BrochureCard from "@/components/BrochureCard";
 
 export const metadata: Metadata = {
-  title: "All brochures",
-  description: "Browse every privacy and security brochure in the library.",
+  title: "全部手册",
+  description:
+    "面向中国大陆用户的隐私与安全手册全部目录，按主题分组。",
 };
 
-export default function BrochuresIndexPage() {
-  const brochures = getAllBrochures();
-  const categories = getCategories();
+export default function ZhBrochuresIndexPage() {
+  const brochures = getAllBrochures("zh");
+  const categories = getCategories("zh");
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <header className="mb-10">
-        <h1 className="text-4xl font-bold tracking-tight">All brochures</h1>
+        <h1 className="text-4xl font-bold tracking-tight">全部手册</h1>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
-          {brochures.length} brochure{brochures.length === 1 ? "" : "s"} across{" "}
-          {categories.length} categor{categories.length === 1 ? "y" : "ies"}.
+          共 {brochures.length} 篇，分布在 {categories.length} 个主题。
         </p>
       </header>
 
@@ -31,7 +31,12 @@ export default function BrochuresIndexPage() {
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((b) => (
-                <BrochureCard key={b.slug} brochure={b} />
+                <BrochureCard
+                  key={b.slug}
+                  brochure={b}
+                  basePath="/zh/brochures"
+                  labels={{ read: "分钟阅读" }}
+                />
               ))}
             </div>
           </section>

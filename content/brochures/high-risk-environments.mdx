@@ -1,0 +1,112 @@
+---
+slug: high-risk-environments
+title: High-Risk Environments
+description: Travel, border crossings, and life under heavy surveillance — practical OPSEC for journalists, lawyers, and at-risk users.
+category: Recovery
+readingTime: 9
+level: advanced
+language: en
+---
+
+This brochure is for people whose threat model is bigger than "a random scammer". Journalists working with sensitive sources, lawyers handling political cases, activists, NGO staff, family members of dissidents, religious minorities, LGBTQ+ people in hostile jurisdictions, domestic-abuse survivors fleeing a controlling partner, and anyone crossing borders into countries with extensive surveillance programs.
+
+It is not a guide to breaking laws. It is a guide to limiting what your devices reveal about you when something goes wrong.
+
+## Step 1: Build a real threat model
+
+Before any tools, answer four questions on paper:
+
+1. **Who am I?** What roles, affiliations, contacts make me interesting?
+2. **Who would care?** State actors, employer, family, criminals, ex-partner, immigration officers — be specific.
+3. **What can they do?** Subpoena cloud accounts, search a device at a border, install malware, coerce a password, read your network traffic.
+4. **What loss would actually hurt?** A source's identity, an unpublished story, location of a safe house, immigration status, evidence of who you talk to.
+
+Your defenses should match the answers. There is no point hardening a phone if your real risk is a roommate guessing your laptop password.
+
+## Step 2: Pick a "clean" device for travel
+
+If you are about to enter a high-surveillance jurisdiction, do **not** bring your daily phone or laptop. Bring a separate device that has:
+
+- A factory-fresh installation of the OS, set up with a fresh account
+- Only the apps you genuinely need for the trip
+- No saved passwords, no backups, no chat history, no photo library
+- Full-disk encryption on, with a strong passphrase (not just biometric)
+- A short, distinct PIN you have never used anywhere else
+
+For phones, **factory iOS** or **GrapheneOS** on a Pixel are strong defaults. Avoid OEM Android forks that ship with mandatory vendor accounts and undocumented telemetry; avoid jailbreaks/roots, which make remote attacks easier.
+
+For laptops, a fresh OS install with FileVault (macOS), BitLocker (Windows), or LUKS (Linux) and a long passphrase. Bring no removable media you cannot afford to lose.
+
+## Step 3: Move sensitive data off the device
+
+Anything you can access from the cloud should not be on the device:
+
+- Source contact lists, draft articles, internal documents, legal files
+- Private photos, family identifiers, address books from home
+- Authentication apps (move 2FA tokens to a hardware key you carry separately, or a fresh authenticator on the travel device that is set up *after* arrival)
+
+Use a reputable encrypted cloud (e.g. Proton Drive, Tresorit, or your organization's E2EE service). Make sure you can sign in with a hardware key, and that the account has no recovery email on the travel device.
+
+## Step 4: Communications
+
+- **Signal** is the de-facto choice for end-to-end encrypted messaging where its use is legal. Set disappearing messages on by default. Verify safety numbers with your most sensitive contacts.
+- Avoid SMS for anything sensitive. Avoid carrier-installed messengers.
+- For voice, prefer Signal calls over PSTN.
+- If a jurisdiction restricts certain tools, do not assume installing them is risk-free. The presence of the app itself can become evidence; some governments treat possession as suspicious. Discuss with a local digital-rights organization (Access Now's Digital Security Helpline can refer you) before deciding what to install.
+
+## Step 5: Borders and checkpoints
+
+Border officers in many countries have legal authority to search and copy electronic devices, sometimes without a warrant and sometimes by compelling passwords. Plan for it:
+
+- **Power off** the device fully before you reach the checkpoint. Cold boot puts modern encryption in its strongest state and disables biometric unlock until your passphrase is entered once.
+- **Disable biometrics** if you can. A face or fingerprint can be compelled by force or court order in more places than a passphrase can.
+- **Sign out of cloud accounts** before crossing. The device should hold only what is on it locally.
+- **Carry a credible cover story** for the device's contents — a tourist phone with normal-looking apps and history, not an obviously empty one.
+- If asked for credentials, **comply rather than escalate** in most cases — you can change passwords and revoke sessions later from a safe network. Refusing can mean detention or device seizure with no recourse.
+- After the search, **assume the device is compromised**. Do not log back into anything sensitive on it; wipe it before reconnecting it to your real life.
+
+## Step 6: While in-country
+
+- Treat every public Wi-Fi (hotel, café, conference, real-name Wi-Fi) as potentially logged. Prefer cellular data on a local SIM that is not tied to your real identity if local law allows; otherwise, accept that your network metadata is being recorded.
+- Do not click certificate-install prompts, "captive portal helpers", or "secure browser" downloads pushed by hotel/venue networks.
+- Keep the device in your physical possession. A phone left in a hotel safe for 30 minutes is enough time for a sophisticated adversary to install persistent malware.
+- Watch for "evil maid" indicators: tamper-evident stickers on laptop screws, screen recorders, USB devices you did not plug in.
+- Reduce attack surface: turn off Bluetooth, AirDrop/Nearby Share, Wi-Fi auto-join, hotspot, and NFC unless you are actively using them.
+
+## Step 7: If you are detained
+
+- Stay calm. Do not lie about who you are.
+- Ask whether you are being detained or are free to leave. Ask for the reason and the agency.
+- **Ask for a lawyer** and for your consulate (if a foreign national). Note names, badge numbers, time, location.
+- Do not consent to anything you do not have to. Compliance with a search is not the same as consent.
+- Assume any device you hand over is fully imaged. Plan post-release credential rotation accordingly.
+
+If you are a foreign national, organizations like the Committee to Protect Journalists, Reporters Without Borders, Front Line Defenders, and Access Now publish jurisdiction-specific guidance and run helplines. Save those contacts on paper before you travel.
+
+## Step 8: Coming home
+
+Within 24 hours of returning to a safe network:
+
+1. Power off and **wipe** the travel device.
+2. Rotate every password you used on it. Start with email, password manager, cloud storage, and any service you logged into.
+3. Revoke all active sessions on those accounts.
+4. Review 2FA: revoke any tokens that were on the travel device.
+5. Check account recovery emails and phone numbers — make sure they still point to *you*, not a number that may have been reassigned.
+6. If you suspect a forensic image was taken: assume any data that was on the device is now permanently in your adversary's hands, and notify any third parties (sources, clients, family) whose information was at risk.
+
+## What to do today
+
+- [ ] Write down your threat model on paper. Update it once a year.
+- [ ] Identify one device you would use as your "clean" travel device, and prepare it now — not the night before.
+- [ ] Move sensitive material off devices you carry into a vetted E2EE cloud.
+- [ ] Save the helpline numbers of one reputable digital-rights organization on paper in your wallet.
+- [ ] Tell at least one trusted person your travel itinerary and a check-in schedule.
+
+> **Bottom line:** in high-risk environments, the device you carry should be one you can afford to lose, and the data on it should be one you can afford to be read. Everything else lives behind a strong account, on a network and device you control.
+
+## Further reading
+
+- EFF — *Surveillance Self-Defense*: https://ssd.eff.org/
+- Access Now — *Digital Security Helpline*: https://www.accessnow.org/help/
+- Committee to Protect Journalists — *Journalist Security Guide*: https://cpj.org/journalist-security-guide/
+- Front Line Defenders — *Workbook on Security*: https://www.frontlinedefenders.org/en/resource-publication/workbook-security-practical-steps-human-rights-defenders-risk
