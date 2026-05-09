@@ -106,6 +106,7 @@ lib/
 | `everyday-data-hygiene` | 普通人的数据卫生清单（不需 root / 刷机） | 日常隐私 |
 | `high-risk-emergency` | 高风险环境下的应急处置 | 紧急应对 |
 | `china-mission-safety` | 跨文化事工与本土牧养的安全注意事项 | 跨文化事工 |
+| `church-tech-volunteer` | 教会技术同工的安全守则 | 跨文化事工 |
 
 ## Editorial scope
 
