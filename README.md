@@ -103,6 +103,7 @@ lib/
 | `harmony-hyper-os` | 鸿蒙 OS 与澎湃 OS 隐私设置 | 设备与系统 |
 | `network-surveillance` | 大数据与网络监控 | 网络与流量 |
 | `secure-messengers` | 加密通讯 APP 选型 | 加密通讯 |
+| `everyday-data-hygiene` | 普通人的数据卫生清单（不需 root / 刷机） | 日常隐私 |
 | `high-risk-emergency` | 高风险环境下的应急处置 | 紧急应对 |
 
 ## Editorial scope
