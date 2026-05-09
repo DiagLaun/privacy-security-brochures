@@ -1,0 +1,74 @@
+---
+slug: two-factor-auth
+title: Two-Factor Authentication
+description: A second layer of protection that turns a stolen password into nothing.
+category: Account Security
+readingTime: 6
+level: beginner
+---
+
+## Why one password is never enough
+
+Passwords get leaked, phished, or guessed. When that happens, the only thing standing between an attacker and your account is whatever second factor you set up. If you didn't set one up, there is nothing standing between them and your account.
+
+**Two-factor authentication (2FA)** — sometimes called two-step verification or multi-factor authentication — adds a second proof when you log in. Even if someone steals your password, they cannot get in without that second factor.
+
+## The three kinds of factors
+
+A factor is something used to prove you are you. There are three types:
+
+1. **Something you know** — a password, PIN, or security question.
+2. **Something you have** — your phone, an authenticator app, a hardware key.
+3. **Something you are** — fingerprint, face, or other biometric.
+
+Strong 2FA combines two different types. Your password (know) plus a code from your phone (have) is real two-factor. Your password plus a security question is just two passwords stacked.
+
+## 2FA methods, ranked
+
+Not all 2FA is equal. From strongest to weakest:
+
+### 1. Hardware security keys (best)
+
+A small USB or NFC device like a YubiKey. You plug it in or tap it to your phone. Phishing-resistant — even if you type your password on a fake site, the key won't authorize the login.
+
+Use this for: email, password manager, and any high-value accounts.
+
+### 2. Passkeys
+
+A modern, phishing-resistant replacement for passwords. Stored in your phone, password manager, or hardware key. Backed by biometrics on your device. Often easier than passwords.
+
+Use this anywhere it's offered.
+
+### 3. Authenticator apps (good)
+
+Apps like 1Password, Bitwarden, Aegis, Raivo, Authy, or Google Authenticator generate a 6-digit code that changes every 30 seconds.
+
+Use this for: most everyday accounts.
+
+### 4. SMS codes (better than nothing)
+
+A code sent by text message. Vulnerable to "SIM-swap" attacks where someone tricks your carrier into transferring your number, but still much better than no 2FA.
+
+Use this only if no better option is available.
+
+### 5. Email codes (weakest)
+
+A code sent to your email. Only as strong as your email account itself — which is exactly the account you most want to protect.
+
+Avoid as a primary 2FA method.
+
+## Backup and recovery
+
+Whatever method you choose, **save your backup codes** when the site offers them. Store them in your password manager or print them and put them somewhere safe. Without backups, losing your phone can mean losing the account.
+
+For hardware keys, register **two** keys per account: one you carry and a spare you store at home. If you lose one, you can still get in.
+
+## What to do today
+
+- [ ] Turn on 2FA for your email account first. If your email is compromised, attackers can reset every other account.
+- [ ] Turn on 2FA for your password manager.
+- [ ] Turn it on for banking, primary social accounts, work accounts, and shopping sites with stored payment.
+- [ ] Save the backup codes somewhere you can find them.
+- [ ] Consider buying two hardware keys for the accounts you care most about.
+
+> **Bottom line:** 2FA is the highest-impact thing you can do for account security after a password manager. Turn it on for email today; you can do the rest tomorrow.

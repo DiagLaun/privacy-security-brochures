@@ -1,0 +1,107 @@
+---
+slug: incident-response-personal
+title: When Something Goes Wrong
+description: A calm, step-by-step playbook for the first 60 minutes after a breach, theft, or scam.
+category: Recovery
+readingTime: 8
+level: intermediate
+---
+
+## Don't panic. Work the list.
+
+In the first hour after you realize something has gone wrong, instinct is to freeze or to lash out by changing every password at once. Neither helps. What helps is a checklist you can run on autopilot, in roughly the right order. Print or save this one before you need it.
+
+## Step 0 — Stop, breathe, and figure out what actually happened
+
+Spend 60 seconds answering:
+
+- **What was lost or compromised?** A device, a password, a code, a card, an account, a file?
+- **Is it still happening?** A phishing site you typed into is different from a finished transaction.
+- **Who else is affected?** Family, work colleagues, customers?
+
+This shapes the rest of your response.
+
+## Lost or stolen device
+
+If a phone, laptop, or tablet was lost or stolen:
+
+1. **Mark as lost** in Find My / find-my-device.
+2. **Remote-lock** the device with a new code if it isn't already locked.
+3. **If you have signs the device is gone for good, remote-wipe it.** Encryption + remote wipe makes the device useless to a thief.
+4. **Sign out of sessions** — in your Google / Apple / Microsoft / Facebook / etc. account, revoke active sessions and trusted devices.
+5. **Change the password** of accounts that were signed in on the device, starting with email.
+6. **Replace SIM** if the phone has a physical SIM, to prevent SIM-based 2FA abuse. Add or strengthen your carrier account PIN.
+7. **Report it** to local police, your employer, and your carrier as appropriate.
+
+## Compromised email account
+
+Email is the master key to everything that resets via "forgot password". Treat any compromise as urgent.
+
+1. **Sign out of all sessions** and **change the password**. Use a generated one from your password manager.
+2. **Turn on 2FA** if it wasn't already, ideally with a hardware key or authenticator app.
+3. **Review forwarding and filters.** Attackers often add a rule that forwards a copy of every email to them, or auto-deletes password-reset emails.
+4. **Review connected apps and OAuth grants.** Revoke anything you don't recognize.
+5. **Check sent items, drafts, and recent activity** for messages you did not send.
+6. **Reset passwords on dependent accounts** — banking, password manager, primary social, work — starting with the most sensitive.
+
+## Compromised password (without phishing)
+
+If a password manager or breach monitor tells you a password leaked, but you didn't type it on a fake site:
+
+1. Change that password.
+2. Change it everywhere you reused it (and stop reusing).
+3. If the leaked account is high-value (email, bank, password manager), assume that account is partly compromised and run the full email recovery flow above.
+
+## You typed a password on a phishing site
+
+Same as above, plus:
+
+1. Assume the attacker has your password **right now**. Speed matters.
+2. Change the password and turn on 2FA before you do anything else.
+3. Sign out of all sessions on that account.
+4. If you also entered a 2FA code, the attacker may have a live session — sign-out and password change are essential.
+5. Watch the account for the next week. Real-time monitoring beats periodic checking.
+
+## You read a 2FA code to someone
+
+This is the same as handing them a temporary password. Do exactly the same recovery as a phishing-site compromise, immediately.
+
+## Card or banking fraud
+
+1. **Lock or freeze the card** in the bank's app.
+2. **Call the fraud line** on the back of the card or on the bank's official site. Not a number from a text or email.
+3. **Dispute unauthorized transactions** — the timeline is usually short, so don't delay.
+4. **Get a new card number.** A frozen card with the same number is still a leak.
+5. **Check account-linked services** (subscription, ride-share, delivery apps) for changed payment methods.
+6. **Review credit reports** (where available in your country) and consider a credit freeze if your identity, not just a card, is involved.
+
+## Ransomware or suspicious software on a device
+
+1. **Disconnect from the network.** Turn off Wi-Fi, unplug Ethernet.
+2. **Do not pay** without consulting professionals. Payment doesn't reliably restore data and may be illegal in some jurisdictions.
+3. **Take a photo** of any ransom note. Then power off.
+4. **Restore from a clean backup** to a freshly imaged or factory-reset device.
+5. **Assume credentials on the device were stolen** and rotate the most sensitive ones.
+
+## After the immediate response
+
+When things have calmed down, do the slower steps:
+
+- File reports where required (employer, police, regulator, identity-theft service).
+- Tell people who may be affected — friends and contacts who could receive scam messages from "you".
+- Write down what happened, what worked, and what you'd change. The next incident is the time to be faster, not the time to learn.
+
+## What to do today (before anything goes wrong)
+
+- [ ] Save this brochure (or print it) somewhere you can find without your phone.
+- [ ] Make sure Find My / find-my-device is enabled on every device.
+- [ ] Make sure your email has 2FA — ideally a hardware key.
+- [ ] Note your bank's fraud line; save it as a contact and check the card back.
+- [ ] Make sure backups exist and you have tested a restore.
+
+> **Bottom line:** in an incident, speed and order matter more than any single tool. Lock the device, secure email first, then work outward — and breathe.
+
+## Further reading
+
+- For users with elevated risk (journalists, lawyers, activists, frequent border crossers), see [High-Risk Environments](/brochures/high-risk-environments) for a more advanced playbook.
+

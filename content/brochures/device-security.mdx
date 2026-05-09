@@ -1,0 +1,85 @@
+---
+slug: device-security
+title: Device Security
+description: Lock screens, encryption, updates, and backups — the foundations on every phone and laptop.
+category: Devices
+readingTime: 7
+level: beginner
+---
+
+## Your devices are the front door
+
+A weak device makes everything else weaker. If someone can pick up your unlocked laptop or phone, your password manager, email, and 2FA codes are all theirs. The good news: most devices ship with strong protections built in. You just have to turn them on.
+
+## The five non-negotiables
+
+### 1. Lock screen with a strong code
+
+Use:
+
+- A **6+ digit PIN** (not 1234, not your birth year, not your address number)
+- A **passphrase** if you can tolerate typing it
+- **Biometrics** (Face ID, Touch ID, Windows Hello) on top — fast and convenient
+
+Set the screen to lock automatically after **1–2 minutes** of inactivity. Lock the screen manually when you walk away from a laptop in a shared space.
+
+### 2. Full-disk encryption
+
+If your device is lost or stolen, encryption is what keeps your files unreadable to a stranger. It is built into every modern OS:
+
+- **macOS** — FileVault. On by default for newer devices; verify in System Settings → Privacy & Security.
+- **Windows** — BitLocker (Pro / Enterprise) or Device Encryption (Home).
+- **iOS / Android** — automatically encrypted when you set a passcode.
+- **Linux** — LUKS (set up at install time).
+
+Save the recovery key somewhere safe — your password manager is fine, an account-linked recovery is fine — just *not* on the same drive.
+
+### 3. Automatic updates
+
+Most exploited bugs are ones with patches that nobody installed. Turn on auto-updates and reboot regularly:
+
+- OS updates
+- App / browser updates
+- Firmware updates (your laptop, your router, your TV — yes, your TV)
+
+Aim to install OS updates within a week of release.
+
+### 4. Backups
+
+Hardware fails. Devices get stolen. Files get encrypted by ransomware. The fix is backups, not hope.
+
+A reasonable home setup:
+
+- **Cloud backup** for everyday files (iCloud, OneDrive, Google Drive, or Backblaze)
+- **Local backup** to an external drive once a week (Time Machine on macOS, File History on Windows)
+- **Test a restore** at least once. A backup you have never verified is not really a backup.
+
+### 5. Find My / device tracking
+
+Turn on the OS-level "find my device" feature for every phone, tablet, and laptop you own. It lets you:
+
+- Locate the device on a map
+- Lock it remotely
+- Wipe it remotely if you can't recover it
+
+Make sure you know the password to your tracking account — it is what you'll use the day you actually need it.
+
+## Bonus: harden the basics
+
+Once the five above are done, a few extras add a lot:
+
+- **Don't run as administrator day-to-day** on Windows or Linux. Use a standard account and elevate when needed.
+- **Review installed apps** every few months. Uninstall anything you don't use.
+- **Turn off Bluetooth and AirDrop / Quick Share** when you aren't using them, especially in public spaces.
+- **Keep your router updated** and change its default admin password. Replace any router that no longer gets firmware updates.
+- **For travel,** consider a separate "travel" laptop or phone with only the data you actually need on it.
+
+## What to do today
+
+- [ ] Set or upgrade your device PIN/passphrase. Enable biometrics.
+- [ ] Confirm full-disk encryption is on.
+- [ ] Turn on automatic updates and install any pending ones.
+- [ ] Set up at least one form of backup, and test it.
+- [ ] Enable Find My / find-my-device.
+
+> **Bottom line:** a locked, encrypted, auto-updating device with backups is dramatically harder to attack — and the recovery story is dramatically better when something does go wrong.
