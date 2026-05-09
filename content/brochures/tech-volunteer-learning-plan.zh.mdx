@@ -1,0 +1,266 @@
+---
+slug: tech-volunteer-learning-plan
+title: 教会技术同工的终身学习计划
+description: 给具有研发背景的事工技术同工——一份分九大领域、三个时间段的长期路线，目标不是"成为顶级安全研究员"，而是让你托住的网络在余下的服侍年日里持续高于威胁水位。
+category: 跨文化事工
+readingTime: 16
+level: advanced
+language: zh
+---
+
+> **本手册不指导任何规避网络管制 / 规避合法侦查的做法**。
+>
+> 它面向**已经有研发能力**、并在事工内部承担技术支持角色的同工。请先阅读「教会技术同工的安全守则」一篇——本篇是它的姊妹篇，从"操作纪律"延伸到"长期学习路径"。
+
+三件事必须先讲在前面：
+
+1. **安全不是"再学一门技术栈"**——它是一种**同时考虑攻、防、人、法**的思维模式。研发同工最容易低估这一点：你能读 Linux 内核源码，不等于你能在电话被询问时不说错话；你会写 Rust，不等于你会做正确的威胁建模。
+2. **这一类身份的学习有"可见性约束"**——你不能在实名 GitHub / LinkedIn / 公开博客上展示这些学习成果。这意味着你失去了一般工程师"以公开作品换求职机会"的反馈回路，要刻意去找别的反馈渠道。
+3. **目标不是"成为顶级安全研究员"**——目标是**在你的事工生命周期里，使整个网络的安全水位持续高于威胁水位**。这两件事的衡量标准完全不同。
+
+## 三个维度：常识、知识、技能
+
+| 维度 | 你需要的 | 失败模式 |
+|---|---|---|
+| 常识 / 文化 | 反射性的判断："这件事该不该做""这话该不该说""这文件该不该写在哪" | 高技术 + 低常识——会写驱动但在朋友圈晒键盘照片 |
+| 知识储备 | 跨学科：密码学、系统、网络、法律、心理、神学（事工层面）的基本框架 | 只会"我用过的工具"——一旦工具失效就完全没办法 |
+| 技能突破 | 持续在 1~2 个领域突破到接近研究水平，在其它领域保持中级理解 | 全员 T-shape 失败：要么样样都浅，要么单点深但无法跨领域 |
+
+> **研发同工最常见的盲点是常识**。你的代码可能很硬，但坐在审讯桌对面那一刻，决定结果的不是你写过几行汇编。
+
+## 九大学习领域
+
+每个领域分**基础**（建议第 1 年）、**进阶**（第 2-3 年）、**精深**（第 3 年起，按个人方向选 1-2 个深入），并给出代表性资源。
+
+### 1. 密码学（基础 + 应用）
+
+事工技术同工**至少**应当真正理解：什么是 AEAD、什么是密钥派生、什么是前向保密、为什么不要自己实现密码学、Signal 协议为什么这样设计、PGP 为什么过时但仍要会用。
+
+- **基础**：《Cryptography Engineering》（Ferguson / Schneier / Kohno）+ Stanford 的 *Cryptography I*（Coursera，Boneh）+ Cryptopals 挑战做完前两组。
+- **进阶**：《Serious Cryptography》（Aumasson）+ *Real-World Cryptography*（David Wong）+ Cryptopals 全部做完 + 阅读 Signal 协议白皮书 / Noise 框架。
+- **精深**：Boneh & Shoup *A Graduate Course in Applied Cryptography*（免费在线）+ Real World Crypto 会议视频年度跟进 + 选一个开源密码库读源码（libsodium / Tink / RustCrypto）。
+
+### 2. 系统与底层（操作系统、二进制、固件）
+
+研发同工通常在这一块有底子。但**事工场景下你需要懂的是攻击面**，不是写个高性能服务。
+
+- **基础**：《操作系统概念》/ *OSTEP*（free）+ 《The Linux Programming Interface》（Kerrisk）核心章节 + Linux 内核安全机制（namespace、cgroup、seccomp、SELinux 概念）。
+- **进阶**：*Practical Reverse Engineering*（Dang）+ *The Art of Software Security Assessment*（Dowd 等）+ pwn.college 的二进制利用模块。
+- **精深**：选一个方向深入：(a) Android 内部（Jonathan Levin 的书 + AOSP 源码 + GrapheneOS 源码）；(b) iOS 内部（Levin *MOXII* 系列）；(c) Linux 内核安全（KSPP、KASAN 这些）；(d) 固件 / Secure Boot / TPM。
+
+### 3. 网络与流量
+
+不是 CCNA 那种。**事工场景下你需要懂的是流量是怎么被识别、被指纹、被分析的**——目标是理解"什么样的网络行为会暴露你"，不是去做规避（手册编辑边界一致）。
+
+- **基础**：《Computer Networking: A Top-Down Approach》（Kurose）核心章节 + 自己亲手抓 Wireshark 抓 100 次（HTTPS 握手、DNS、TCP 握手、TLS 1.3 SNI、QUIC）。
+- **进阶**：*Bulletproof TLS and PKI*（Ristic）+ *Practical Packet Analysis*（Sanders）+ 学术阅读："Encrypted DNS - Privacy?" 类论文（USENIX Security）。
+- **精深**：流量分析与指纹学术领域——读 Roya Ensafi、Nick Feamster、Cecylia Bocovich 这些学者的论文（这是公开的网络测量研究，不是规避指南）。
+
+### 4. 应用安全（Web / 移动 / 桌面）
+
+研发同工日常工作就在写应用，**写"安全的应用"**是另一回事。
+
+- **基础**：OWASP Top 10 + OWASP ASVS + PortSwigger Web Security Academy（免费、质量极高）+ HackTheBox / TryHackMe 入门路径。
+- **进阶**：*The Tangled Web*（Zalewski）+ *The Web Application Hacker's Handbook*（虽老仍是经典）+ 移动端：OWASP MASVS + Frida 动态分析入门。
+- **精深**：选一个方向：(a) Web/API 安全研究；(b) 移动端逆向（Frida、Objection、Ghidra、IDA）；(c) 桌面应用安全（含 Electron、Tauri 等）；(d) 浏览器内部（Chromium 源码）。
+
+### 5. 威胁建模与 OPSEC
+
+研发同工最容易**跳过这一节**，但这是**事工同工最该深入的一节**。
+
+- **基础**：Shostack《Threat Modeling: Designing for Security》+ STRIDE / DREAD 框架 + 自己针对 1 个事工场景做完整威胁模型并写出来。
+- **进阶**：Tactical Tech *Holistic Security* 全部读完 + EFF *Surveillance Self-Defense* 全部读完 + 给团队做一次"如果今天我被带走"的桌面演练。
+- **精深**：读 Citizen Lab 过去 10 年所有针对受迫害群体的报告、提炼模式 + 学习 *intelligence-led* 安全思路（Robert M. Lee、SANS ICS）+ 自己写一份长期的本群体威胁情报。
+
+### 6. 取证与事件响应
+
+为什么研发同工要懂这个？因为出事时，你要能回答"对方拿到了什么"。
+
+- **基础**：*Practical Malware Analysis*（Sikorski / Honig）前半本 + *The Art of Memory Forensics*（Ligh）核心章节 + 自己用 volatility / autopsy 做过 5 个练习镜像。
+- **进阶**：*Incident Response & Computer Forensics*（Mandia 等）+ SANS 408 / 508 大纲（不一定要考证，照着学）+ 移动端取证（Cellebrite / GrayKey 公开能力研究）。
+- **精深**：选一个方向：(a) 移动端取证对抗（你需要知道对手能拿到什么）；(b) 网络取证；(c) 内存取证；(d) 反取证 / 数据残留研究。
+
+### 7. 法律素养
+
+研发同工**最严重低估**的一块。和「教会技术同工的安全守则」一致：你需要懂法律，不是为了规避法律，而是**为了知道行为的法律后果分界线在哪**。
+
+- **基础**：通读中国《刑法》第 285-287 条之二（含帮信罪）+ 网络安全法 + 数据安全法 + 个人信息保护法 + 找一位有跨境刑事经验的律师做一次 1 小时咨询。
+- **进阶**：阅读最高人民法院的相关司法解释 + 关于"翻墙"和"提供工具"的典型判例（公开可查）+ 国际人权公约（ICCPR 第 19 条）+ 联合国关于互联网与人权的特别报告员报告。
+- **精深**：和律师建立长期咨询关系（不是免费白嫖，是预付费小时数那种）+ 研究比较法（香港、台湾、新加坡的相似条款）+ 跟进 ChinaAid / China Law Translate 等机构的案例追踪。
+
+### 8. 对手研究 / 威胁情报
+
+你要研究的不是抽象敌人，是**已被公开记录过的、针对类似群体的真实手法**。
+
+- **基础**：Citizen Lab 过去 5 年所有中国相关报告 + Google TAG 季度报告 + Project Zero 博客（精选阅读）。
+- **进阶**：Mandiant APT 报告（公开版本）+ 阅读 USENIX Security / IEEE S&P / NDSS / CCS 关于审查检测、移动间谍软件、跨境威胁的论文（每年挑 5-10 篇精读）。
+- **精深**：长期追踪 1-2 个特定 APT 组（公开报告里）+ 自己做一份"针对类似群体的工具与手法演化"内部备忘录 + 关注 Pegasus / Predator / 腾讯安全等公开研究里相关披露。
+
+### 9. 牧者层面：教学、传承、自我关顾
+
+研发同工最不习惯把这一块当"学习领域"——但**这是这份路线里最容易出问题的一块**，因为你不能在朋友圈讨论你的学习进度。
+
+- **基础**：Peter Scazzero *Emotionally Healthy Spirituality*（事工场景特别相关）+ 一本基础的辅导 / 教练学入门书 + 一本关于"伯仲倦怠 / burnout"的书（Christina Maslach 经典）。
+- **进阶**：学一些**教学法**——Bloom 分类法、刻意练习（Anders Ericsson）、Feynman 技巧 + 自己尝试给 1 位接班人做季度训练并记录什么有效什么没效。
+- **精深**：发展 1-2 位真正的接班人（不只是会一些操作，是能完整接你的角色）+ 找一位**事工网络外**的牧者 / 辅导员长期面谈 + 学习简单的创伤敏感（trauma-informed）回应能力——你迟早会接到正在受惊吓的同工的求助。
+
+## 时间线（粗线条）
+
+### 第 1 年：地基
+
+不要急着追"有趣的"——先把 9 个领域的基础全过一遍。**真的全部过一遍**，不是"挑感兴趣的"。
+
+- 每个领域选 1 本基础书 + 1 个练习平台 / 课程；用 12 个月走完。
+- 同时，第 1 年完成**两件事工层面的具体任务**：(1) 给团队做一次完整威胁建模并写下来；(2) 给自己设备和家庭做一次完整的 OPSEC 加固。
+
+### 第 2-3 年：精选 2 个领域深入
+
+- 选 2 个你天然有兴趣 + 对事工场景最有用的领域，进入"进阶"层。
+- 一年读 30+ 篇相关学术论文 + 做 30+ 小时 hands-on 实验。
+- 同时**正式承担 1 位接班人的训练**——这是你"教学"维度的第一次实操。
+
+### 第 3 年起：精深 1 个领域 + 横向广度维持
+
+- 选 1 个领域进入"精深"层——可能是密码学、可能是移动端逆向、可能是法律 / 案件研究。
+- 其它 8 个领域保持每月若干小时的"维持性阅读"，跟得上前沿。
+- 此阶段开始**承担"群体技术官"的角色**：制定标准、教学、文档、巡检、灾备演练。
+
+### 第 5 年起：传承与稀释
+
+- 你的目标变成"让这群人**没有我也能持续运营**"。
+- 培训接班人、写运行手册、把"独家知识"系统化。
+- 个人继续在精深领域往前走，但在事工层面**有意识地稀释自己的中心地位**。
+- 这与"力量倍增器问题"的应对策略一致（参见「教会技术同工的安全守则」）。
+
+### 终身：维持节奏，**而不是不断攀升**
+
+到一定阶段，安全研究会进入"边际收益递减"区。这时**最重要的是节奏**——稳定地读、稳定地练、稳定地教、稳定地休——而不是永远追逐新工具。
+
+## 每周 / 每月 / 每年节奏
+
+事工技术同工的学习节奏比一般工程师更需要**结构化**，因为缺少公开的反馈回路。
+
+- **每周**：
+  - 至少 2 小时论文 / 长文阅读（不是技术博客，是真正的论文 / 长篇研究）。
+  - 至少 2 小时 hands-on（CTF、复现 PoC、漏洞分析）。
+  - 至少 1 次和 1 位可信同伴的技术对话（线下或加密通讯）。
+  - **1 整天**完全离开终端（自我关顾这一块的硬性纪律）。
+- **每月**：
+  - 完成 1 个小型完整项目（比如复现一篇论文、加固一台机器、写一份内部技术备忘）。
+  - 1 次教学行为：教接班人 / 同工 / 家人某项技能。
+  - 1 次自我审计：把上个月做过的事、留下的痕迹审查一次。
+- **每季度**：
+  - 团队级"如果今天我被带走"演练。
+  - 学习计划重审一次——哪些目标完成了、哪些过时了、哪些没做、为什么。
+- **每年**：
+  - 一次完整的 OPSEC 全面体检（设备、账号、痕迹、流程）。
+  - 一次和律师 / 海外法律支援 / 差派机构的安全官对齐当年的法律风险。
+  - 一次和**事工网络外**的牧者 / 辅导员的"年度状态"对话（不是技术，是人）。
+
+## 避坑清单
+
+研发同工特别容易掉的坑：
+
+- **追证书 / 追工具 / 追新技术，但不追威胁建模**。OSCP 比一份给自己团队写的威胁模型容易写到简历上，但后者对你的真实场景更有价值。
+- **过度公开学习痕迹**。技术骄傲是研发文化的一部分，但这个角色没有这个奢侈。
+- **重读不重写**。读 100 本书不如把 1 本书的内容用自己的话讲清楚一遍——而且讲得清楚是教学接班人的前提。
+- **重技术不重法律**。绝大多数研发同工把法律视为"脏活"。在这个角色里，**法律素养是你能不能保护自己和别人的硬约束**。
+- **重个人不重传承**。你越强，团队越脆——除非你刻意把强度迁移出去。
+- **重攀升不重休息**。安全圈高光案例几乎都伴随长期 burnout。这一类事工里，burnout 不是个人问题，是**团队风险**。
+- **把"硬核安全"和"事工"绑在一个公开身份上**。这是上一篇手册的核心警告，在学习路径里同样适用——你的学习成果**不**应该出现在能链回你身份的地方。
+
+## 可以做、但建议低调或匿名进行的事
+
+- 公开博客 / 技术写作——必须在与你真实身份**完全不重合**的笔名下，且话题与本群体场景不相关。
+- 开源贡献——主线项目可以用真实身份贡献（这是正常工程师生涯的一部分），**但任何与隐私 / OPSEC / 审查 / 受迫害群体相关的项目，使用独立笔名**。
+- CTF——选择匿名注册的赛事，不要参加需要实名 / 工作信息的比赛。
+- 安全社群——慎选；很多 Telegram / Discord 群是开源情报的金矿。Matrix / IRC 加 Tor 出口是相对稳妥的选择。
+- 安全会议——线上观看 + 仅以观察者身份；现场发言 / 露脸 / 联合发表论文需要 case-by-case 评估。
+
+## 不建议追求的事
+
+- **以个人名义提供任何形式的安全 / 隐私技术服务给非核心成员**——上一篇手册的法律边界。无论学得多好都不要跨这条线。
+- **公开领跑的"安全研究员"身份**——这不属于你的角色定位，且会显著提升你的可见性。
+- **把家庭住址 / 工作单位 / 社交账号和这条学习路径任何环节绑定**——任何注册需要实名的学习平台都需要谨慎判断。
+- **集中追求"看起来硬核"的认证（OSCP、OSEP、OSEE）**——技术上很有价值，但**作为简历项目对这个角色而言负价值**——它把你往"安全岗位"招聘市场里推，而那不是你的赛道。
+- **加入任何要求"提供个人详细信息"的研究项目 / 学术合作**——除非你已经把身份隔离做得非常彻底。
+
+## 今天就能做的事
+
+- [ ] 把九大领域抄一份纸质清单贴在工作区，每月对每个领域问一句"过去 30 天我在这一块做了什么"。
+- [ ] 选第 1 年的 9 本基础书 / 9 个课程，写在同一张纸上，给自己定个完成时间。
+- [ ] 找 1 位可信同伴（事工内或事工外但不在同一可见性身份），约一个每两周一次的"技术对话 + 个人状态"30 分钟。
+- [ ] 列出**你目前公开身份上**和"安全 / 隐私 / OPSEC"相关的所有痕迹，开始有意识地清理 / 转移到匿名身份。
+- [ ] 把每周 1 整天"完全离开终端"的时间块写进日历（**这不是建议，是纪律**）。
+- [ ] 与一位有跨境 / 网络刑事经验的律师做第一次 1 小时付费咨询。
+- [ ] 给自己写一份"五年后我希望成为的那种事工技术同工"的素描——一页 A4，每年回看一次。
+
+> **底线**：事工技术同工的学习路径，目标不是"成为顶级安全研究员"，是**让你所托住的网络在你余下的服侍年日里持续高于威胁水位**。
+>
+> 三件事如果只能记住三件：
+> 1. **常识 + 知识 + 技能三个维度都要长**——其中**常识最容易被研发文化忽略，但最容易决定结局**。
+> 2. **学习成果不是简历**——你失去了一般工程师"以公开作品换求职"的反馈回路，要刻意建立别的反馈渠道（小型可信同伴 + 接班人 + 自我审计）。
+> 3. **教学和传承是学习路径的一部分，不是路径之外的事**——你的目标是让这群人**没有你也能继续走**。
+>
+> 信仰的层面我们不替你回答。技术 / 学习 / 自我关顾这三层，请按这份路线持续做下去——这是这一代研发同工对下一代最实在的礼物。
+
+## 资料来源与参考
+
+> 此清单偏重**经典 + 公开 + 可长期使用**的资源；本身不构成对任何特定政治议程的支持。
+
+**密码学**：
+
+- Boneh & Shoup *A Graduate Course in Applied Cryptography*（免费）：https://toc.cryptobook.us/
+- Stanford *Cryptography I*（Coursera）：https://www.coursera.org/learn/crypto
+- Cryptopals 挑战：https://cryptopals.com/
+- *Real-World Cryptography*（David Wong）：https://www.manning.com/books/real-world-cryptography
+
+**系统 / 二进制**：
+
+- *OSTEP*（免费）：https://pages.cs.wisc.edu/~remzi/OSTEP/
+- pwn.college（免费）：https://pwn.college/
+- LiveOverflow 视频系列：https://www.youtube.com/c/LiveOverflow
+
+**网络 / 应用安全**：
+
+- PortSwigger Web Security Academy（免费、质量很高）：https://portswigger.net/web-security
+- HackTheBox / TryHackMe（免费 + 付费）：https://www.hackthebox.com/ ， https://tryhackme.com/
+- OWASP 资源总入口：https://owasp.org/
+
+**威胁建模 / OPSEC**：
+
+- Shostack *Threat Modeling*（书）：https://shostack.org/books/threat-modeling-book
+- EFF *Surveillance Self-Defense*：https://ssd.eff.org/
+- Tactical Tech *Holistic Security*：https://holistic-security.tacticaltech.org/
+
+**取证 / IR**：
+
+- Volatility Foundation 文档：https://volatilityfoundation.org/
+- *Practical Malware Analysis* 配套实验：https://practicalmalwareanalysis.com/
+
+**法律**：
+
+- 《中华人民共和国刑法》原文（人大网官方）：http://www.npc.gov.cn/
+- China Law Translate（双语判例 / 法律翻译）：https://www.chinalawtranslate.com/
+- ChinaAid 法律资源：https://www.chinaaid.org/
+- ICCPR 全文：https://www.ohchr.org/en/instruments-mechanisms/instruments/international-covenant-civil-and-political-rights
+
+**对手研究 / 威胁情报**：
+
+- Citizen Lab：https://citizenlab.ca/
+- Google Threat Analysis Group：https://blog.google/threat-analysis-group/
+- Project Zero：https://googleprojectzero.blogspot.com/
+- USENIX Security 论文（免费）：https://www.usenix.org/conferences/byname/108
+
+**会议（视频回放）**：
+
+- DEF CON Media Server：https://media.defcon.org/
+- USENIX Security：https://www.usenix.org/
+- Chaos Computer Congress：https://media.ccc.de/
+- Real World Crypto：https://rwc.iacr.org/
+
+**牧者 / 自我关顾**：
+
+- Peter Scazzero *Emotionally Healthy Spirituality*。
+- Christina Maslach *The Truth About Burnout*。
+- Henri Nouwen *The Wounded Healer*——为什么"懂技术的同工"最容易承担集体创伤。
